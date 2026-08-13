@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Customer analytics warehouse star schema</title>
+  <desc id="desc">Two fact tables share user and date dimensions. Event facts also reference device and channel dimensions.</desc>
+  <defs>
+    <style>
+      .bg { fill: #111827; }
+      .title { fill: #f8fafc; font: 700 34px Arial, sans-serif; }
+      .subtitle { fill: #94a3b8; font: 18px Arial, sans-serif; }
+      .box { fill: #1f2937; stroke: #64748b; stroke-width: 2; rx: 14; }
+      .dim-header { fill: #2563eb; }
+      .fact-header { fill: #d97706; }
+      .header-text { fill: #ffffff; font: 700 25px Arial, sans-serif; }
+      .field { fill: #e5e7eb; font: 20px Arial, sans-serif; }
+      .key { fill: #fbbf24; font: 700 20px Arial, sans-serif; }
+      .relationship { fill: none; stroke: #cbd5e1; stroke-width: 3; }
+      .cardinality { fill: #f8fafc; font: 700 18px Arial, sans-serif; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1600" height="1000"/>
+  <text class="title" x="800" y="48" text-anchor="middle">Customer Analytics Warehouse — Star Schema</text>
+  <text class="subtitle" x="800" y="78" text-anchor="middle">PK = primary key · UK = unique business key · FK = foreign key</text>
+
+  <!-- Relationships are drawn first so that table cards remain visually dominant. -->
+  <path class="relationship" d="M 440 225 L 535 285"/>
+  <text class="cardinality" x="452" y="218">1</text>
+  <text class="cardinality" x="511" y="278">*</text>
+
+  <path class="relationship" d="M 1160 225 L 1065 285"/>
+  <text class="cardinality" x="1138" y="218">1</text>
+  <text class="cardinality" x="1075" y="278">*</text>
+
+  <path class="relationship" d="M 440 665 L 535 475"/>
+  <text class="cardinality" x="452" y="654">1</text>
+  <text class="cardinality" x="511" y="482">*</text>
+
+  <path class="relationship" d="M 440 785 L 535 775"/>
+  <text class="cardinality" x="452" y="778">1</text>
+  <text class="cardinality" x="511" y="770">*</text>
+
+  <path class="relationship" d="M 1160 645 L 1065 475"/>
+  <text class="cardinality" x="1138" y="638">1</text>
+  <text class="cardinality" x="1075" y="482">*</text>
+
+  <path class="relationship" d="M 1160 785 L 1065 775"/>
+  <text class="cardinality" x="1138" y="778">1</text>
+  <text class="cardinality" x="1075" y="770">*</text>
+
+  <!-- Channel dimension -->
+  <g transform="translate(40 140)">
+    <rect class="box" width="400" height="170"/>
+    <path class="dim-header" d="M 14 0 H 386 Q 400 0 400 14 V 55 H 0 V 14 Q 0 0 14 0 Z"/>
+    <text class="header-text" x="200" y="37" text-anchor="middle">dw.dim_channel</text>
+    <text class="key" x="24" y="92">channel_key (PK)</text>
+    <text class="field" x="24" y="128">channel (UK)</text>
+  </g>
+
+  <!-- Device dimension -->
+  <g transform="translate(1160 140)">
+    <rect class="box" width="400" height="170"/>
+    <path class="dim-header" d="M 14 0 H 386 Q 400 0 400 14 V 55 H 0 V 14 Q 0 0 14 0 Z"/>
+    <text class="header-text" x="200" y="37" text-anchor="middle">dw.dim_device</text>
+    <text class="key" x="24" y="92">device_key (PK)</text>
+    <text class="field" x="24" y="128">device (UK)</text>
+  </g>
+
+  <!-- Event fact -->
+  <g transform="translate(535 120)">
+    <rect class="box" width="530" height="445"/>
+    <path class="fact-header" d="M 14 0 H 516 Q 530 0 530 14 V 58 H 0 V 14 Q 0 0 14 0 Z"/>
+    <text class="header-text" x="265" y="39" text-anchor="middle">dw.fact_events</text>
+    <text class="key" x="28" y="96">event_key (PK)</text>
+    <text class="field" x="28" y="132">event_id (UK)</text>
+    <text class="field" x="28" y="168">user_key (FK)</text>
+    <text class="field" x="28" y="204">date_key (FK)</text>
+    <text class="field" x="28" y="240">device_key (FK)</text>
+    <text class="field" x="28" y="276">channel_key (FK)</text>
+    <text class="field" x="28" y="312">event_type</text>
+    <text class="field" x="28" y="348">event_timestamp</text>
+    <text class="field" x="28" y="384">session_id</text>
+  </g>
+
+  <!-- User dimension -->
+  <g transform="translate(40 600)">
+    <rect class="box" width="400" height="270"/>
+    <path class="dim-header" d="M 14 0 H 386 Q 400 0 400 14 V 55 H 0 V 14 Q 0 0 14 0 Z"/>
+    <text class="header-text" x="200" y="37" text-anchor="middle">dw.dim_users</text>
+    <text class="key" x="24" y="92">user_key (PK)</text>
+    <text class="field" x="24" y="128">user_id (UK)</text>
+    <text class="field" x="24" y="164">registration_date</text>
+    <text class="field" x="24" y="200">region</text>
+    <text class="field" x="24" y="236">age_group</text>
+  </g>
+
+  <!-- Order fact -->
+  <g transform="translate(535 600)">
+    <rect class="box" width="530" height="365"/>
+    <path class="fact-header" d="M 14 0 H 516 Q 530 0 530 14 V 58 H 0 V 14 Q 0 0 14 0 Z"/>
+    <text class="header-text" x="265" y="39" text-anchor="middle">dw.fact_orders</text>
+    <text class="key" x="28" y="92">order_key (PK)</text>
+    <text class="field" x="28" y="124">order_id (UK)</text>
+    <text class="field" x="28" y="156">user_key (FK)</text>
+    <text class="field" x="28" y="188">date_key (FK)</text>
+    <text class="field" x="28" y="220">order_timestamp</text>
+    <text class="field" x="28" y="252">amount</text>
+    <text class="field" x="28" y="284">currency</text>
+    <text class="field" x="28" y="316">payment_method</text>
+    <text class="field" x="28" y="348">status</text>
+  </g>
+
+  <!-- Date dimension -->
+  <g transform="translate(1160 540)">
+    <rect class="box" width="400" height="380"/>
+    <path class="dim-header" d="M 14 0 H 386 Q 400 0 400 14 V 55 H 0 V 14 Q 0 0 14 0 Z"/>
+    <text class="header-text" x="200" y="37" text-anchor="middle">dw.dim_date</text>
+    <text class="key" x="24" y="92">date_key (PK)</text>
+    <text class="field" x="24" y="128">full_date (UK)</text>
+    <text class="field" x="24" y="164">year</text>
+    <text class="field" x="24" y="200">quarter</text>
+    <text class="field" x="24" y="236">month</text>
+    <text class="field" x="24" y="272">day</text>
+    <text class="field" x="24" y="308">day_name</text>
+    <text class="field" x="24" y="344">week_of_year</text>
+  </g>
+</svg>
